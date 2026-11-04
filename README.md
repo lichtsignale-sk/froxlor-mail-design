@@ -5,7 +5,7 @@ or company name and the server name, readable body text, login details set
 off in a box, links, an optional footer, and dark mode support. Without
 changing a single Froxlor file.
 
-**Version 1.0.0** — for Froxlor 2.3 (tested against 2.3.13 and checked
+**Version 1.0.1** — for Froxlor 2.3 (tested against 2.3.13 and checked
 against 2.3.16), PHP 8.1 or newer.
 
 ## What and why
