@@ -1,0 +1,10 @@
+# Editors and operating systems
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Local files
+/vendor/
+*.log
