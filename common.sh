@@ -110,6 +110,9 @@ md_as_owner() {
 			fd="${fd##*/}"
 			[[ "$fd" =~ ^[0-9]+$ && "$fd" -gt 2 ]] && eval "exec $fd>&-" 2>/dev/null
 		done
+		# Never start the new user in the caller's directory (usually /root): it
+		# cannot enter it, and tools like find fail on their initial directory.
+		cd / || exit 1
 		"${WRITE_AS[@]+"${WRITE_AS[@]}"}" "$@" 2>&1 | tr -d "$CONTROL_CHARS"
 	)
 }
