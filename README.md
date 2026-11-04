@@ -254,7 +254,7 @@ Files outside the extension's own: the systemd units
   as are symbolic links below the Froxlor directory. `umask 022`; tar unpacks
   with `--no-same-owner --no-same-permissions`; only an explicit list of
   files is installed.
-* **Command line only**: the relay script, the migrations and the tests
+* **Command line only**: the relay script and the migrations
   answer HTTP requests with 404; the settings page and the German catalog do
   the same when requested directly instead of being loaded by Froxlor.
 * **Database access** uses exactly the keys Froxlor writes into
@@ -318,33 +318,6 @@ the panel is in the next mail.
 **Failure means "unstyled", never "lost".** Styling is a nice-to-have; the
 mail itself is not.
 
-## Tests
-
-These run without Froxlor, database or mail server:
-
-```bash
-php tests/mail-design.php      # styling: structure, escaping, charsets, fallback, logo storage
-php tests/relay.php            # SMTP protocol, AUTH, limits, timeouts, sendmail call, logo loading
-php tests/smtp-switch.php      # switching SMTP settings and restoring them (SQLite in memory)
-php tests/settings.php         # settings page, migration defaults and relay agree
-php tests/db-connection.php    # userdata.inc.php read like Froxlor (socket, port, TLS block)
-php tests/lang.php             # every text has a German translation, placeholders match
-```
-
-`tests/relay.php` uses `pcntl` for the SMTP conversations (skipped without
-it); the tests also run as root. With the path of a Froxlor installation as argument, it additionally
-sends a real mail through the relay with that installation's PHPMailer (only
-read from there), configured exactly as `Froxlor\System\Mailer` does:
-
-```bash
-php tests/relay.php /var/www/froxlor
-```
-
-For a manual end-to-end test, use a disposable Froxlor (for example Froxlor's
-Docker setup or a throwaway VM with Postfix): install, run
-`mail-design.sh ... on`, send a test mail from Settings › System › Mail, and
-look at the result in a mail client. Never test on a production server.
-
 ## Layout
 
 ```
@@ -369,10 +342,9 @@ migrations/
   remove.php                                database clean-up on uninstall
   connection.php                            connection for the scripts above
 common.sh                                   shared helpers of the shell scripts (not installed)
-tests/                                      test scripts, see above
 ```
 
-`tests/` and `migrations/` are not copied into Froxlor.
+`migrations/` is not copied into Froxlor.
 
 ## License
 
