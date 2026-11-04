@@ -61,7 +61,7 @@ final class DbConnection
 			throw new \RuntimeException('userdata.inc.php contains no usable $sql configuration.');
 		}
 
-		$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+		$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, self::mysqlAttribute('LOCAL_INFILE') => false];
 		$dsn = ['charset' => 'utf8', 'dbname' => (string)$sql['db']];
 		$socket = $sql['socket'] ?? null;
 		if ($socket !== null && $socket !== '') {

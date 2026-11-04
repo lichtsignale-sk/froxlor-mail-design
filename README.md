@@ -188,7 +188,7 @@ Files outside the extension's own: the systemd units
   limited to 2 KB, messages to 10 MB (larger ones are read to the end and
   refused with 552), at most 100 recipients, at most 8 connections at a time
   (`MaxConnections=8`), each limited by `RuntimeMaxSec=600`, `TasksMax=16` and
-  `MemoryMax=256M`. Three failed logins close the connection. End-of-data and
+  `MemoryMax=256M`. Three failed logins close the connection. A local user can still occupy the 8 connection slots for a while (the relay turns them away after the connection is accepted); if that matters on your server, restrict port 2530 to the panel user and root with a firewall rule on the user ID. End-of-data and
   dot-unstuffing are only recognised at the start of a line, even when a long
   line arrives in several chunks.
 * **Safe fallback**: if anything goes wrong while styling (unknown format,

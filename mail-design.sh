@@ -187,6 +187,9 @@ Description=Froxlor Mail Design relay (127.0.0.1:$PORT)
 ListenStream=127.0.0.1:$PORT
 Accept=yes
 MaxConnections=8
+# No trigger limit: a flood of connections is capped by MaxConnections and
+# must not leave the socket in the failed state until an admin restarts it.
+TriggerLimitIntervalSec=0
 NoDelay=true
 
 [Install]

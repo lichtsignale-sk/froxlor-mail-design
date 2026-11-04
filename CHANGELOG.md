@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+* Security: the panel database connection disables `LOCAL INFILE`.
+* The relay socket has no trigger limit any more (`TriggerLimitIntervalSec=0`); a flood of local connections is capped by `MaxConnections` and can no longer leave the socket failed. Run `./mail-design.sh /var/www/froxlor on` again to apply it.
+
 ## 1.0.0
 
 Initial public release.
